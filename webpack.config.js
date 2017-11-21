@@ -43,9 +43,9 @@ module.exports = (webpackConfig, env) => {
     }),
   ])
 
-  // Alias
+  // 可以在这里设置整个项目的通用引用目录
   webpackConfig.resolve.alias = {
-    components: `${__dirname}/src/components`,
+    wolf: `${__dirname}/src/components`,
     utils: `${__dirname}/src/utils`,
     config: `${__dirname}/src/config`,
     routes: `${__dirname}/src/routes`,
