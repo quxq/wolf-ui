@@ -5,21 +5,15 @@ import dynamic from 'dva/dynamic'
 import App from 'routes/app'
 import { DynamicRoute } from 'utils'
 import  * as commonfunc from 'utils/commonfunc'
-import RouterConfig from 'config/router'
+import {RouterConfig} from 'config'
 
 const { ConnectedRouter } = routerRedux
-
-
-
-
 
 const Routers = function ({ history, app }) {
   const error = dynamic({
     app,
     component: () => import('./routes/error'),
   })
-
-
 
   return (
     <ConnectedRouter history={history}>

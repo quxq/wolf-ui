@@ -16,9 +16,7 @@ export default class Login extends React.Component{
         <button onClick={()=>{
            this.props.toPath('/login')
       }}>sdfdf</button>
-        <div>
-          <DynamicSubRoute {...this.props}/>
-        </div>
+
       </div>
     )
   }
