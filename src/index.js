@@ -3,6 +3,7 @@ import dva from 'dva'
 import createLoading from 'dva-loading'
 import createHistory from 'history/createBrowserHistory'
 import 'babel-polyfill'
+import Router from './router'
 
 // 1. Initialize
 const app = dva({
@@ -18,7 +19,7 @@ const app = dva({
 
 
 // 3. Router
-app.router(require('./router'))
+app.router(Router)
 
 // 4. Start
 app.start('#root')
