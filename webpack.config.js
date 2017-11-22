@@ -12,7 +12,10 @@ module.exports = (webpackConfig, env) => {
     // ClassnameHash
       webpackConfig.module.rules.map((item) => {
         if (String(item.test) === '/\\.less$/' || String(item.test) === '/\\.css/') {
-          item.use.filter(iitem => iitem.loader === 'css')[0].options.localIdentName = '[hash:base64:5]'
+          let css=item.use.filter(iitem => iitem.loader === 'css')[0]
+              css.options.localIdentName = '[hash:base64:3]'
+              css.module=true
+              css.camelCase= true
         }
         return item
       })

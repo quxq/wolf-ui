@@ -1,0 +1,47 @@
+@ant-prefix:"mp";
+@breadcrumb-prefix-cls: ~"@{ant-prefix}-breadcrumb";
+.@{breadcrumb-prefix-cls}{
+  position: absolute;left:0;top:0;right:0;bottom: 0;
+}
+.mainframe {
+  position: absolute;left:0;top:0;right:0;bottom: 0;
+
+  .df{
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    left:20px;
+
+    div[class='ant-progress-outer']{
+      display:block;
+      width:auto;
+    }
+
+    span{
+      display: block;
+      width:100%;
+      color:#fff;
+    }
+  }
+
+
+  .logo{
+    height: 32px;
+    border-radius: 6px;
+    margin: 16px;
+    background-repeat: no-repeat;
+    background-image: -webkit-image-set(url(https://pan.baidu.com/box-static/disk-theme/theme/white/img/logo.png?t=1470151327639) 1x,
+    url(https://pan.baidu.com/box-static/disk-theme/theme/white/img/logo@2x.png?t=1470151327639) 2x);
+
+  }
+  .trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 16px;
+    cursor: pointer;
+    transition: color .3s;
+  }
+  .trigger:hover {
+    color: #108ee9;
+  }
+}

@@ -20,7 +20,21 @@ const RouterConfig=[
         component: () => import('../routes/admin/person'),
       }
     ]
-  }
+  },
+    {
+        path: '/netdriver',
+        component: () => import('../routes/netdriver'),
+        routes:[
+            {
+                path: '/netdriver/dept',
+                component: () => import('../routes/admin/dept'),
+            },
+            {
+                path: '/netdriver/person',
+                component: () => import('../routes/admin/person'),
+            }
+        ]
+    }
 
 ]
 export default RouterConfig
