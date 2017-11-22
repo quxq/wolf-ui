@@ -1,23 +1,60 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Button, Row, Form, Input } from 'antd'
+import { AppConfig  } from 'config'
+import styles from './index.less'
 
-import { DynamicSubRoute } from 'utils'
+const FormItem = Form.Item
 
-export default class Login extends React.Component{
+/**
+ * 登 录
+ */
+class Login extends React.Component{
+
+  handleOk = () =>{
+    this.props.form.validateFieldsAndScroll((err, values) => {
+       if(!err){
+         this.props.toPath('/admin')
+       }
+    })
+  }
 
   render(){
-    console.log(this.props)
+    console.log(AppConfig)
+    const { getFieldDecorator } = this.props.form
     return (
-
-      <div>
-      <h1>hello the world111111</h1>
-        <Link to="/login/a">a</Link>
-        <Link to="/login/b">b</Link>
-        <button onClick={()=>{
-           this.props.toPath('/login')
-      }}>sdfdf</button>
-
+      <div className={styles.form}>
+        <div className={styles.logo}>
+          <img alt={'logo'} src={AppConfig.logo} />
+          <span>{AppConfig.name}</span>
+        </div>
+      <Form>
+        <FormItem hasFeedback>
+          {getFieldDecorator('username', {
+            rules: [{
+              required: true, message: '请输入用户账号!',
+            }],
+          })(
+            <Input size="large"  placeholder="Username" onPressEnter={this.handleOk} />
+          )}
+        </FormItem>
+        <FormItem hasFeedback>
+          {getFieldDecorator('password', {
+            rules: [
+              {
+                required: true,message: '请输入密码!',
+              },
+            ],
+          })(<Input size="large" type="password" onPressEnter={this.handleOk} placeholder="Password" />)}
+        </FormItem>
+        <Row>
+          <Button type="primary" size="large" onClick={this.handleOk} > 登 录 </Button>
+        </Row>
+      </Form>
       </div>
     )
   }
 }
+
+const LoginForm = Form.create()(Login)
+
+export default LoginForm
