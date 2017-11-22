@@ -5,15 +5,19 @@
 const RouterConfig=[
   {
     path: '/login',
-    component: () => import('../routes/login/'),
+    component: () => import('../routes/login/')
+  },
+  {
+    path: '/admin',
+    component: () => import('../routes/admin/mainframes'),
     routes:[
       {
-        path: '/login/a',
-        component: () => import('../routes/login/a'),
+        path: '/admin/dept',
+        component: () => import('../routes/admin/dept'),
       },
       {
-        path: '/login/b',
-        component: () => import('../routes/login/b'),
+        path: '/admin/person',
+        component: () => import('../routes/admin/person'),
       }
     ]
   }
