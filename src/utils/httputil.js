@@ -9,7 +9,7 @@ import {AppConfig} from  'config'
 class HttpUtil {
   constructor () {
     //this.baseAddr = 'http://192.168.1.240:8517'
-    this.baseAddr =AppConfig.ApiBaseUrl
+    this.baseAddr = AppConfig.ApiBaseUrl
     // this.baseAddr = '/breipapi'
     this.url = ''
     this.method = 'post'

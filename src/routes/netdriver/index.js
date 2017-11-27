@@ -29,23 +29,15 @@ export default class MainFrames extends React.Component{
         <div className={styles.logo} />
 
         <Menu theme="dark" mode="inline" defaultOpenKeys={['sub0']} defaultSelectedKeys={['1']}>
-
-          <SubMenu
-              key="sub0"
-              title={<span><Icon type="user" /><span>文件</span></span>}
-          >
             <Menu.Item key="5"><Link to="/netdriver/dept"><Icon type="file-text" />全部文件</Link></Menu.Item>
-            <Menu.Item key="6"><Link to="/netdriver/dept"><Icon type="user" />图片</Link></Menu.Item>
-            <Menu.Item key="7"><Link to="/netdriver/dept"><Icon type="user" />文档</Link></Menu.Item>
-            <Menu.Item key="8"><Link to="/netdriver/dept"><Icon type="user" />视频</Link></Menu.Item>
-            <Menu.Item key="9"><Link to="/netdriver/dept"><Icon type="user" />种子</Link></Menu.Item>
-            <Menu.Item key="10"><Link to="/netdriver/dept"><Icon type="user" />音乐</Link></Menu.Item>
-            <Menu.Item key="11"><Link to="/netdriver/dept"><Icon type="user" />其他</Link></Menu.Item>
-
-          </SubMenu>
+            <Menu.Item key="6"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>图片</span></Link></Menu.Item>
+            <Menu.Item key="7"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>文档</span></Link></Menu.Item>
+            <Menu.Item key="8"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>视频</span></Link></Menu.Item>
+            <Menu.Item key="9"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>种子</span></Link></Menu.Item>
+            <Menu.Item key="10"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>音乐</span></Link></Menu.Item>
+            <Menu.Item key="11"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>其他</span></Link></Menu.Item>
           <Menu.Item key="2" >
-
-            <Link to="/netdriver/person"><Icon type="share-alt" /> <span>我的分享</span></Link>
+            <Link to="/netdriver/person"><Icon type="share-alt" /><span>我的分享</span></Link>
           </Menu.Item>
           <Menu.Item key="3">
             <Link to="/netdriver/person"><Icon type="delete" /><span>回收站</span></Link>
@@ -55,13 +47,9 @@ export default class MainFrames extends React.Component{
       </Sider>
       <Layout>
         <Header style={{ background: '#fff', padding: 0 }}>
-          <Icon
-            className={styles.trigger}
-            type={this.state.collapsed ? 'appstore-o' : 'appstore'}
-            onClick={this.toggle}
-          />
+
         </Header>
-        <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+        <Content style={{ padding: 0,position:'relative',top:0,bottom:0,margin:'0px'}}>
           <DynamicSubRoute {...this.props}/>
         </Content>
       </Layout>

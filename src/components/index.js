@@ -1,6 +1,9 @@
 import AntTreeGrid from './treegrid/AntTreeGrid'
 import AdminFindLayout from './layout/AdminFindLayout'
-export{
+import Component from './Component'
+
+export {
   AntTreeGrid,
-  AdminFindLayout
+  AdminFindLayout,
+  Component
 }
