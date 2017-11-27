@@ -1,20 +1,30 @@
 
-import { AdminFindLayout, AntTreeGrid,Component} from 'wolf'
+import { AdminFindLayout, AntDataGrid, Component } from 'wolf'
 import { Button } from 'antd'
 
 export default class Allfile extends Component {
+  state = {
+    selectedRowKeys: [], // Check here to configure the default column
+  }
   /**
    *
    * 配置区
    * =======================================================================================================================
    */
   config={
-    atgConfig: { url: '/dept/findByParentId', param: { parentId: 0 }, map: { key: 'dept_id', pkey: 'p_dept_id' } },
+    atgConfig: { url: '/customer/page', param: { pageSize: 15, startNum: 0 }, map: { key: 'dept_id', pkey: 'p_dept_id' } },
     columns: [{
       title: '文件名',
       dataIndex: 'name',
       key: 'name',
       width: '40%',
+      render: (text, record) => {
+        let color = 'red'
+        if (!record.fileselect) {
+          color = '#444'
+        }
+        return { children: <div style={{ color }}>{text}</div> }
+      },
     }, {
       title: '大小',
       dataIndex: 'age',
@@ -27,29 +37,7 @@ export default class Allfile extends Component {
     }],
   }
 
-  /**
-   *
-   * 配置区结束
-   * =======================================================================================================================
-   * 事件区开始
-   */
 
-  delHandle=() => {
-    // this.setState({ loading:true })
-    this.refs.atg.delNode({ dept_id: 1000, p_dept_id: 0, name: '测试' })
-  }
-
-  addHandle=() => {
-    // this.setState({ loading:true })
-    this.refs.atg.addRoot({ dept_id: 1000, p_dept_id: 0, name: '测试' })
-  }
-  addSubHandle=() => {
-    // this.setState({ loading:true })
-    this.refs.atg.addSub(1000, { dept_id: 1001, p_dept_id: 1000, name: '测试1' })
-    this.refs.atg.addSub(1000, { dept_id: 1002, p_dept_id: 1000, name: '测试2' })
-    this.refs.atg.addSub(1001, { dept_id: 1003, p_dept_id: 1001, name: '测试3' })
-    this.refs.atg.addSub(1001, { dept_id: 1004, p_dept_id: 1001, name: '测试4' })
-  }
   /**
    *
    * 配置区结束
@@ -58,15 +46,42 @@ export default class Allfile extends Component {
    */
 
 
+  rowClassName =(record, index) => {
+    if (this.state.selectedRowKeys.findIndex(function(value, index, arr) {
+        return value ==record.customer_id
+        })!==-1) {
+      return 'selected'
+    }
+    return ''
+  }
+
+  onRowClick = (record, index, event) => {
+    // record.fileselect = true;
+    // this.rowSelection.selectedRowKeys=[record.customer_id]
+    this.setState({ selectedRowKeys: [record.key] })
+  }
+  rowKey =(record) => {
+    record.key=record.customer_id
+    return record.customer_id
+  }
   render () {
+    const { selectedRowKeys } = this.state
+    const rowSelection = {
+      selectedRowKeys,
+      hideDefaultSelections: true,
+      onChange: (selectedRowKeys, selectedRows) => {
+        this.setState({ selectedRowKeys });
+      },
+      onSelection: this.onSelection,
+    }
     return (
       <AdminFindLayout topHeight={60} vspace={0}>
         <div style={{ lineHeight: '60px', marginLeft: 10 }}>
-          <Button type="primary" icon="plus" size="large" onClick={this.addHandle} >新增</Button>
-          <Button type="primary" style={{marginLeft:16}} icon="plus" size="large" onClick={this.addSubHandle} >新增下级</Button>
-          <Button type="primary" style={{marginLeft:16}} icon="plus" size="large" onClick={this.delHandle} >删除</Button>
+          <Button type="primary" icon="plus" size="large" onClick={this.addHandle} >上传</Button>
+          <Button style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.addSubHandle} >新建文件夹</Button>
+          <Button style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.delHandle} >离线下载</Button>
         </div>
-        <AntTreeGrid config={this.config.atgConfig} columns={this.config.columns} ref="atg" />
+        <AntDataGrid config={this.config.atgConfig} rowKey={this.rowKey} rowClassName={this.rowClassName} onRowClick={this.onRowClick} rowSelection={rowSelection} isPagination={false} columns={this.config.columns} ref="atg" />
       </AdminFindLayout>
     )
   }

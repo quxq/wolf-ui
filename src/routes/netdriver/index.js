@@ -29,7 +29,7 @@ export default class MainFrames extends React.Component{
         <div className={styles.logo} />
 
         <Menu theme="dark" mode="inline" defaultOpenKeys={['sub0']} defaultSelectedKeys={['1']}>
-            <Menu.Item key="5"><Link to="/netdriver/dept"><Icon type="file-text" />全部文件</Link></Menu.Item>
+            <Menu.Item key="5"><Link to="/netdriver/allfile"><Icon type="file-text" />全部文件</Link></Menu.Item>
             <Menu.Item key="6"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>图片</span></Link></Menu.Item>
             <Menu.Item key="7"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>文档</span></Link></Menu.Item>
             <Menu.Item key="8"><Link to="/netdriver/dept"><span style={{marginLeft:'22px'}}>视频</span></Link></Menu.Item>

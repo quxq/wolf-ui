@@ -13,11 +13,10 @@ export default class AntDataGrid extends Component {
   data = [];
 
 
-
   componentDidMount () {
     this.treehttp = this.http()
     this.treehttp.url = this.props.config.url
-    if(this.props.isPagination){
+    if (this.props.isPagination) {
       let pager = this.state.pagination
       pager.current = 1
       pager.pageSize = 14
@@ -26,7 +25,7 @@ export default class AntDataGrid extends Component {
       pager.total = 1000
       pager.showTotal = this.showTotal
     }
-    //dd
+    // dd
 
     this.load()
   }
@@ -52,10 +51,10 @@ export default class AntDataGrid extends Component {
    * @param key
    */
   load=() => {
-    this.treehttp.data = {...this.props.config.param,...this.state.pagination}
+    this.treehttp.data = { ...this.props.config.param, ...this.state.pagination }
 
     this.treehttp.post((data) => {
-      if(this.props.isPagination) {
+      if (this.props.isPagination) {
         this.state.pagination.total = data.total
       }
       this.data = data.list
@@ -67,7 +66,7 @@ export default class AntDataGrid extends Component {
 
   render () {
     return (
-      <Table className={this.props.isPagination ? styles.antDatagridPage:styles.antDatagrid} pagination={this.props.isPagination ? this.state.pagination : false}  onChange={this.props.isPagination ? this.handleTableChange : false} columns={this.props.columns} scroll={{ y: true }} {...this.props} ref="dg" dataSource={this.data}  />
+      <Table className={this.props.isPagination ? styles.antDatagridPage : styles.antDatagrid} pagination={this.props.isPagination ? this.state.pagination : false} onChange={this.props.isPagination ? this.handleTableChange : () => {}} columns={this.props.columns} scroll={{ y: true }} {...this.props} ref="dg" dataSource={this.data} />
     )
   }
 }
