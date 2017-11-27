@@ -19,7 +19,7 @@ const Routers = function ({ history, app }) {
     <ConnectedRouter history={history}>
       <App>
        <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/task/create" />)} />
+          <Route exact path="/" render={() => (<Redirect to="/netdriver/allfile" />)} />
            {
              RouterConfig.map(({ path, ...dynamics }, key) => (
                <DynamicRoute key={key}
