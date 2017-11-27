@@ -1,5 +1,6 @@
 import Component from '../Component'
 import { Table } from 'antd'
+import styles from './AntTreeGrid.less'
 /**
  *
  */
@@ -142,7 +143,7 @@ export default class AntTreeGrid extends Component {
 
   render () {
     return (
-      <Table columns={this.props.columns} onExpand={this.onExpand} {...this.props} ref="dg" dataSource={this.data} pagination={false} />
+      <Table className={styles.anttreegrid} columns={this.props.columns} scroll={{y:true}}  onExpand={this.onExpand} {...this.props} ref="dg" dataSource={this.data} pagination={false} />
     )
   }
 }
