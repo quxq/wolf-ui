@@ -14,7 +14,7 @@ class EditCell extends Component {
     this.props.value.name = this.state.v
     this.props.value.editable = false
     if (this.props.updateRecord) {
-      this.props.updateRecord(0,this.props.value)
+      this.props.updateRecord(0, this.props.value)
     }
   }
   handleCancel =() => {
@@ -74,7 +74,7 @@ export default class AllfileDataGrid extends Component {
               <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">复制</a>
             </Menu.Item>
             <Menu.Item>
-              <a onClick={()=>{this.editCell(record)}}>重命名</a>
+              <a onClick={() => { this.editCell(record) }}>重命名</a>
             </Menu.Item>
           </Menu>
         )
@@ -119,13 +119,13 @@ export default class AllfileDataGrid extends Component {
    * 事件区结束
    */
 
-  editCell = (record) =>{
+  editCell = (record) => {
     record.editable = true
     this.state.editable = true
     this.setState({ selectedRowKeys: [] })
   }
 
-  updateRecord = (state,record) => {
+  updateRecord = (state, record) => {
     alert(record.name)
     this.state.editable = false
   }
@@ -141,7 +141,7 @@ export default class AllfileDataGrid extends Component {
 
   onRowClick = (record, index, event) => {
     if (this.state.editable) {
-      //this.setState({ selectedRowKeys: [] })
+      // this.setState({ selectedRowKeys: [] })
       return
     }
     // record.fileselect = true;
@@ -165,12 +165,11 @@ export default class AllfileDataGrid extends Component {
   }
 
   onRowMouseEnter =(record, index, event) => {
-    if(this.state.selectedRowKeys.length<2){
+    if (this.state.selectedRowKeys.length < 2) {
       this.setState({ overkey: record.files_id })
-    }else{
+    } else {
       this.setState({ overkey: 0 })
     }
-
   }
 
   render () {
@@ -183,12 +182,10 @@ export default class AllfileDataGrid extends Component {
           this.props.selectedFiles(selectedRows)
         }
 
-
-        if(selectedRowKeys.length>1){
-          this.setState({ selectedRowKeys, overkey: 0  })
-        }else
-        {
-          this.setState({ selectedRowKeys})
+        if (selectedRowKeys.length > 1) {
+          this.setState({ selectedRowKeys, overkey: 0 })
+        } else {
+          this.setState({ selectedRowKeys })
         }
       },
       onSelection: (!this.state.editable ? this.onSelection : () => {}),

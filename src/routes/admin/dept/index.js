@@ -1,6 +1,8 @@
 import React from 'react'
-import { AdminFindLayout, AntTreeGrid } from 'wolf'
+import { AdminFindLayout, AntTreeGrid, Dialog, AntForm } from 'wolf'
 import { Button, Icon } from 'antd'
+import DeptDialog from './deptDialog'
+
 
 export default class Dept extends React.Component {
   /**
@@ -9,21 +11,26 @@ export default class Dept extends React.Component {
    * =======================================================================================================================
    */
   config={
-    atgConfig: { url: '/dept/findByParentId', param: { parentId: 0 }, map: { key: 'dept_id', pkey: 'p_dept_id' } },
+    atgConfig: { url: '/dept', param: { parentId: 0 }, map: { key: 'dept_id', pkey: 'p_dept_id', sort: 'sort_id', subcount: 'subcount' } },
     columns: [{
-      title: 'Name',
+      title: '部门名称',
       dataIndex: 'name',
       key: 'name',
       width: '40%',
     }, {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
-      width: '30%',
-    }, {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: '',
+      dataIndex: 'worker',
+      key: 'worker',
+      render: (text, record) => (
+        <div>
+          <span style={{ marginLeft: 10 }} onClick={() => { this.addSubHandle(record) }}><Icon type="plus" />新增</span>
+          <span style={{ marginLeft: 10 }} onClick={() => { this.delHandle(record) }}><Icon type="delete" />删除</span>
+          <span style={{ marginLeft: 10 }} onClick={() => { this.moveLeftHandle(record) }}><Icon type="arrow-left" />左移动</span>
+          <span style={{ marginLeft: 10 }} onClick={() => { this.moveUpHandle(record) }}><Icon type="arrow-up" />上移动</span>
+          <span style={{ marginLeft: 10 }} onClick={() => {this.moveDownHandle(record) }}><Icon type="arrow-down" />下移动</span>
+          <span style={{ marginLeft: 10 }} onClick={() => {this.moveRightHandle(record) }}><Icon type="arrow-right" />右移动</span>
+        </div>
+      ),
     }],
   }
 
@@ -33,22 +40,52 @@ export default class Dept extends React.Component {
    * =======================================================================================================================
    * 事件区开始
    */
-
-  delHandle=() => {
+  componentDidMount () {
+    this.depid = 100
+  }
+  delHandle=(record) => {
     // this.setState({ loading:true })
-    this.refs.atg.delNode({ dept_id: 1000, p_dept_id: 0, name: '测试' })
+    this.refs.atg.delNode(record)
   }
 
   addHandle=() => {
+    this.depid++
+    this.command = 1
+    this.refs.dialog.setTitle('新增部门')
+    this.refs.dialog.show()
+
+    console.log(this.refs.aaa)
     // this.setState({ loading:true })
-    this.refs.atg.addRoot({ dept_id: 1000, p_dept_id: 0, name: '测试' })
+    // this.refs.atg.addRoot({ dept_id: 1000, p_dept_id: 0, name: '测试' })
   }
-  addSubHandle=() => {
-    // this.setState({ loading:true })
-    this.refs.atg.addSub(1000, { dept_id: 1001, p_dept_id: 1000, name: '测试1' })
-    this.refs.atg.addSub(1000, { dept_id: 1002, p_dept_id: 1000, name: '测试2' })
-    this.refs.atg.addSub(1001, { dept_id: 1003, p_dept_id: 1001, name: '测试3' })
-    this.refs.atg.addSub(1001, { dept_id: 1004, p_dept_id: 1001, name: '测试4' })
+  addSubHandle=(record) => {
+    this.depid++
+    this.command = 2
+    this.curr = record
+    this.refs.dialog.setTitle('新增子部门')
+    this.refs.dialog.show()
+  }
+
+  moveUpHandle=(record) => {
+    this.refs.atg.moveUp(record)
+  }
+  moveDownHandle=(record) => {
+    this.refs.atg.moveDown(record)
+  }
+  moveLeftHandle=(record) => {
+    this.refs.atg.moveLeft(record)
+  }
+  moveRightHandle=(record) => {
+    this.refs.atg.moveRight(record)
+  }
+
+  submitOk = (values) => {
+    if (this.command === 1) {
+      this.refs.atg.addRoot({ dept_id: this.depid, p_dept_id: '0', name: values.name, sort_id: values.sort_id })
+    }
+    if (this.command === 2) {
+      this.refs.atg.addSub(this.curr.dept_id, { dept_id: this.depid, p_dept_id: this.curr.dept_id, name: values.name, sort_id: values.sort_id })
+    }
   }
   /**
    *
@@ -63,9 +100,11 @@ export default class Dept extends React.Component {
       <AdminFindLayout topHeight={60}>
         <div style={{ lineHeight: '60px', marginLeft: 10 }}>
           <Button type="primary" icon="plus" size="large" onClick={this.addHandle} >新增</Button>
-          <Button type="primary" style={{marginLeft:16}} icon="plus" size="large" onClick={this.addSubHandle} >新增下级</Button>
-          <Button type="primary" style={{marginLeft:16}} icon="plus" size="large" onClick={this.delHandle} >删除</Button>
+          <Button type="primary" style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.addSubHandle} >新增下级</Button>
+          <Button type="primary" style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.delHandle} >删除</Button>
+          <DeptDialog ref="dialog" submitOk={this.submitOk} />
         </div>
+
         <AntTreeGrid config={this.config.atgConfig} columns={this.config.columns} ref="atg" />
       </AdminFindLayout>
     )

@@ -2,10 +2,14 @@ import AntTreeGrid from './treegrid/AntTreeGrid'
 import AntDataGrid from './datagrid/AntDataGrid'
 import AdminFindLayout from './layout/AdminFindLayout'
 import Component from './Component'
+import Dialog from './dialog/Dialog'
+import { WolfForm, AntForm } from './form/Form'
 
 export {
   AntTreeGrid,
   AntDataGrid,
   AdminFindLayout,
-  Component
+  Component,
+  Dialog,
+  WolfForm, AntForm,
 }
