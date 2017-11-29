@@ -58,7 +58,7 @@ export default class MainFrames extends React.Component{
             <Menu.Item key="sub2_2"><Link to="/admin/dept"><Icon type="user" />多层动态路由</Link></Menu.Item>
           </SubMenu>
         </Menu>
-        <div className={styles.df}><Progress percent={50} style={{paddingRight:0}} format={percent => `\n${percent}mb/2005G 扩容至5T`}/></div>
+        <div className={styles.df}>{!this.state.collapsed?<Progress percent={50} style={{paddingRight:0}} format={percent => `\n${percent}mb/2005G 扩容至5T`}/>:''}</div>
       </Sider>
       <Layout>
         <Header style={{ background: '#fff', padding: 0 }}>

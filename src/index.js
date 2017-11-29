@@ -5,6 +5,7 @@ import createHistory from 'history/createBrowserHistory'
 import 'babel-polyfill'
 import Router from './router'
 
+require('./themes/default.less')
 // 1. Initialize
 const app = dva({
   ...createLoading({

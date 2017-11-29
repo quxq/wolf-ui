@@ -100,8 +100,7 @@ export default class Dept extends React.Component {
       <AdminFindLayout topHeight={60}>
         <div style={{ lineHeight: '60px', marginLeft: 10 }}>
           <Button type="primary" icon="plus" size="large" onClick={this.addHandle} >新增</Button>
-          <Button type="primary" style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.addSubHandle} >新增下级</Button>
-          <Button type="primary" style={{ marginLeft: 16 }} icon="plus" size="large" onClick={this.delHandle} >删除</Button>
+
           <DeptDialog ref="dialog" submitOk={this.submitOk} />
         </div>
 

@@ -57,6 +57,9 @@ export default class AntDataGrid extends Component {
         this.state.pagination.total = data.total
       }
       this.data = data.list
+      if(this.props.loadAfter){
+         this.props.loadAfter((data))
+      }
       this.setState({
         loading: false,
       })
