@@ -9,7 +9,6 @@ export default class AntDataGrid extends Component {
     loading: false,
     pagination: { showQuickJumper: true, showSizeChanger: true },
   }
-
   data = [];
 
 
