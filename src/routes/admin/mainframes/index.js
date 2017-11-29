@@ -44,7 +44,7 @@ export default class MainFrames extends React.Component{
             key="sub1"
             title={<span><Icon type="user" /><span>异形设计</span></span>}
           >
-            <Menu.Item key="sub1_1"><Link to="/admin/dept"><Icon type="user" />表格模版1</Link></Menu.Item>
+            <Menu.Item key="sub1_1"><Link to="/admin/templet1"><Icon type="user" />模版1</Link></Menu.Item>
             <Menu.Item key="sub1_2"><Link to="/admin/dept"><Icon type="user" />表格模版1</Link></Menu.Item>
             <Menu.Item key="sub1_3"><Link to="/admin/dept"><Icon type="user" />表格模版1</Link></Menu.Item>
             <Menu.Item key="sub1_4"><Link to="/admin/dept"><Icon type="file-text" />表格模版1</Link></Menu.Item>

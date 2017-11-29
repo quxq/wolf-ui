@@ -16,8 +16,8 @@ const RouterConfig=[
         component: () => import('../routes/admin/dept'),
       },
       {
-        path: '/admin/person',
-        component: () => import('../routes/admin/person'),
+        path: '/admin/templet1',
+        component: () => import('../routes/admin/templet1'),
       }
     ]
   },

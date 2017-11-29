@@ -4,6 +4,8 @@ import AdminFindLayout from './layout/AdminFindLayout'
 import Component from './Component'
 import Dialog from './dialog/Dialog'
 import { WolfForm, AntForm } from './form/Form'
+import * as Templet from './templet/index'
+import List from './list/List'
 
 export {
   AntTreeGrid,
@@ -12,4 +14,6 @@ export {
   Component,
   Dialog,
   WolfForm, AntForm,
+  Templet,
+  List
 }
