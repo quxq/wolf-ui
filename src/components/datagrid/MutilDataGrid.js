@@ -1,15 +1,18 @@
 import Component from '../Component'
 import { Table } from 'antd'
 import styles from './AntDataGrid.less'
+import { ListBox ,Templet} from 'wolf'
 /**
  *
  */
-export default class AntDataGrid extends Component {
+export default class MutilDataGrid extends Component {
   state = {
     loading: false,
     pagination: { showQuickJumper: true, showSizeChanger: true },
+    togstyle: 0,
   }
   data = [];
+
 
   componentDidMount () {
     this.treehttp = this.http()
@@ -26,6 +29,11 @@ export default class AntDataGrid extends Component {
     // dd
 
     this.load()
+  }
+
+  togDgStyle = (num) => {
+    // alert(num);
+    this.setState({ togstyle: num })
   }
 
   handleTableChange = (pagination, filters, sorter) => {
@@ -50,8 +58,8 @@ export default class AntDataGrid extends Component {
         this.state.pagination.total = data.total
       }
       this.data = data.list
-      if(this.props.loadAfter){
-         this.props.loadAfter((data))
+      if (this.props.loadAfter) {
+        this.props.loadAfter((data))
       }
       this.setState({
         loading: false,
@@ -60,9 +68,23 @@ export default class AntDataGrid extends Component {
   }
 
   render () {
-    return (
-      <Table className={this.props.isPagination ? styles.antDatagridPage : styles.antDatagrid} pagination={this.props.isPagination ? this.state.pagination : false} onChange={this.props.isPagination ? this.handleTableChange : () => {}} columns={this.props.columns} scroll={{ y: true }} {...this.props} ref="dg" dataSource={this.data} />
-    )
+    return (<div>{
+      this.state.togstyle === 0 ?
+        <Table className={this.props.isPagination ? styles.antDatagridPage : styles.antDatagrid}
+          pagination={this.props.isPagination ? this.state.pagination : false}
+          onChange={this.props.isPagination ? this.handleTableChange : () => {
+          }}
+          columns={this.props.columns}
+          scroll={{ y: true }}
+          {...this.props}
+          ref="dg"
+          dataSource={this.data}
+        />
+        : (<ListBox {...this.props} dataSource={this.data}>
+              <Templet.FileBox></Templet.FileBox>
+           </ListBox>
+          )
+    }</div>)
   }
 }
 

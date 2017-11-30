@@ -11,6 +11,7 @@ export default class ToolBar extends React.Component {
   state={
     sortid: 0,
     visible: false,
+    togstyle: 0,
   }
   hide = () => {
     this.setState({
@@ -20,6 +21,22 @@ export default class ToolBar extends React.Component {
 
   handleVisibleChange = (visible) => {
     this.setState({ visible })
+  }
+
+  togDgStyle =() => {
+
+    if (this.state.togstyle === 0) {
+      this.state.togstyle=1
+
+    } else {
+      this.state.togstyle=0
+     // this.setState({ togstyle: 0 })
+    }
+    if (this.props.togDgStyle) {
+
+      this.props.togDgStyle(this.state.togstyle)
+      this.setState({ togstyle: this.state.togstyle })
+    }
   }
 
   render () {
@@ -62,8 +79,8 @@ export default class ToolBar extends React.Component {
               <Icon type="arrow-down" />
             </Button>
           </Popover>
-          <Button style={{ marginLeft: 10 }}>
-            <Icon type="appstore" />
+          <Button style={{ marginLeft: 10 }} onClick={this.togDgStyle}>
+            {this.state.togstyle === 0 ? <Icon type="appstore" />:<Icon type="menu-fold" />}
           </Button>
         </div>
       </div>)

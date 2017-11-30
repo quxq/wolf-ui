@@ -29,11 +29,15 @@ export default class Allfile extends Component {
     }
   }
 
+  togDgStyle =(num)=>{
+    this.refs.atg.togDgStyle(num)
+  }
+
   render () {
     return (
       <AdminFindLayout topHeight={80} vspace={0}>
         <div style={{ marginLeft: 10 }}>
-          <ToolBar filesnum={this.state.filesnum} />
+          <ToolBar filesnum={this.state.filesnum} togDgStyle={this.togDgStyle}/>
           <div style={{ lineHeight: '40px' }}>{this.state.selectinfo}</div>
         </div>
         <AllfileDataGrid ref="atg" selectedFiles={this.selectedFiles} />

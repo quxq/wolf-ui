@@ -2,7 +2,7 @@
  * Created by quxiangqian on 2017/11/27.
  */
 
-import { AntDataGrid, Component } from 'wolf'
+import { MutilDataGrid, Component } from 'wolf'
 import { Menu, Dropdown, Icon, Input, Button } from 'antd'
 
 
@@ -116,8 +116,12 @@ export default class AllfileDataGrid extends Component {
    *
    * 配置区结束
    * =======================================================================================================================
-   * 事件区结束
+   * 事件区开始
    */
+
+  togDgStyle = (num) => {
+     this.refs.atg.togDgStyle(num)
+  }
 
   editCell = (record) => {
     record.editable = true
@@ -194,7 +198,7 @@ export default class AllfileDataGrid extends Component {
       }),
     }
     return (
-      <AntDataGrid config={this.config.atgConfig} onRowMouseEnter={this.onRowMouseEnter} rowKey={this.rowKey} rowClassName={this.rowClassName} onRowClick={this.onRowClick} rowSelection={rowSelection} isPagination={false} columns={this.config.columns} ref="atg" />
+      <MutilDataGrid config={this.config.atgConfig} onRowMouseEnter={this.onRowMouseEnter} rowKey={this.rowKey} rowClassName={this.rowClassName} onRowClick={this.onRowClick} rowSelection={rowSelection} isPagination={false} columns={this.config.columns} ref="atg" />
     )
   }
 }
