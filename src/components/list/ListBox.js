@@ -20,7 +20,7 @@ export default class ListBox extends React.Component {
   }
 
   render () {
-    return (<div className="list">
+    return (<div className="listbox">
       {this.props.dataSource.map((item) => {
         // console.log(this.props.children)
         // this.props.children.props = { datasource: item }

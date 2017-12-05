@@ -38,9 +38,14 @@ export default class Allfile extends Component {
       <AdminFindLayout topHeight={80} vspace={0}>
         <div style={{ marginLeft: 10 }}>
           <ToolBar filesnum={this.state.filesnum} togDgStyle={this.togDgStyle}/>
-          <div style={{ lineHeight: '40px' }}>{this.state.selectinfo}</div>
+          <div style={{ lineHeight: '40px' }}>
+            <span>
+              返回上一级|全部文件
+            </span>
+            <span>{this.state.selectinfo}</span>
+          </div>
         </div>
-        <AllfileDataGrid ref="atg" selectedFiles={this.selectedFiles} />
+        <AllfileDataGrid ref="atg" parentId={this.props.match.params.id} selectedFiles={this.selectedFiles} />
       </AdminFindLayout>
     )
   }

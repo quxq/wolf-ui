@@ -4,7 +4,7 @@
 
 import { MutilDataGrid, Component } from 'wolf'
 import { Menu, Dropdown, Icon, Input, Button } from 'antd'
-
+import { Link } from 'react-router-dom'
 
 class EditCell extends Component {
   state = {
@@ -36,7 +36,7 @@ class EditCell extends Component {
             <Button onClick={this.handleCancel}><Icon type="close" />Cancel</Button>
           </Button.Group>
         </span>
-        : this.props.value.name
+        : <Link to={"/netdriver/allfile/"+this.props.value.files_id}>{this.props.value.name}</Link>
       }
     </div>)
   }
@@ -48,6 +48,7 @@ export default class AllfileDataGrid extends Component {
     selectedRowKeys: [], // Check here to configure the default column
     overkey: 0,
     editable: false,
+    loading:true,
   }
   /**
    *
@@ -55,7 +56,7 @@ export default class AllfileDataGrid extends Component {
    * =======================================================================================================================
    */
   config={
-    atgConfig: { url: '/driver/allfile', param: { pageSize: 15, startNum: 0 }, map: { key: 'dept_id', pkey: 'p_dept_id' } },
+    atgConfig: { url: '/driver/allfile', param: { pageSize: 15, startNum: 0 ,parentId:0}, map: { key: 'dept_id', pkey: 'p_dept_id' } },
     columns: [{
       title: '文件名',
       dataIndex: 'name',
@@ -111,6 +112,18 @@ export default class AllfileDataGrid extends Component {
     }],
   }
 
+  constructor(props){
+    super(props)
+    //console.log(this.props.parentId)
+    //this.config.atgConfig.param.parentId=this.props.parentId
+
+  }
+
+  componentDidUpdate(){
+
+    //this.flush();
+    //this.refs.atg.load()
+  }
 
   /**
    *
@@ -130,7 +143,7 @@ export default class AllfileDataGrid extends Component {
   }
 
   updateRecord = (state, record) => {
-    alert(record.name)
+    //alert(record.name)
     this.state.editable = false
   }
 
@@ -176,6 +189,15 @@ export default class AllfileDataGrid extends Component {
     }
   }
 
+  flush=()=>{
+    if (this.props.selectedFiles) {
+      this.props.selectedFiles(this.state.selectedRowKeys)
+    }
+    this.setState({loading:true});
+  }
+
+
+
   render () {
     const { selectedRowKeys } = this.state
     const rowSelection = {
@@ -197,8 +219,15 @@ export default class AllfileDataGrid extends Component {
         disabled: record.f_t === 1 || this.state.editable, // Column configuration not to be checked
       }),
     }
+    if(this.props.parentId){
+      this.config.atgConfig.param.parentId=this.props.parentId
+    }else{
+      this.config.atgConfig.param.parentId=0
+    }
+
+    console.log(this.props.parentId)
     return (
-      <MutilDataGrid config={this.config.atgConfig} onRowMouseEnter={this.onRowMouseEnter} rowKey={this.rowKey} rowClassName={this.rowClassName} onRowClick={this.onRowClick} rowSelection={rowSelection} isPagination={false} columns={this.config.columns} ref="atg" />
+      <MutilDataGrid config={this.config.atgConfig} flush={this.flush}  onRowMouseEnter={this.onRowMouseEnter} rowKey={this.rowKey} rowClassName={this.rowClassName} onRowClick={this.onRowClick} rowSelection={rowSelection} isPagination={false} columns={this.config.columns} ref="atg" />
     )
   }
 }

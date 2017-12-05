@@ -62,7 +62,7 @@ export default class MutilDataGrid extends Component {
         this.props.loadAfter((data))
       }
       this.setState({
-        loading: false,
+        loading: true,
       })
     })
   }
@@ -80,7 +80,7 @@ export default class MutilDataGrid extends Component {
           ref="dg"
           dataSource={this.data}
         />
-        : (<ListBox {...this.props} dataSource={this.data}>
+        : (<ListBox {...this.props} dataSource={this.data} {...this.props}>
               <Templet.FileBox></Templet.FileBox>
            </ListBox>
           )

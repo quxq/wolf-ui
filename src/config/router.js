@@ -29,6 +29,10 @@ const RouterConfig=[
                 path: '/netdriver/allfile',
                 component: () => import('../routes/netdriver/allfile'),
             },
+          {
+            path: '/netdriver/allfile/:id',
+            component: () => import('../routes/netdriver/allfile'),
+          },
             {
                 path: '/netdriver/person',
                 component: () => import('../routes/admin/person'),

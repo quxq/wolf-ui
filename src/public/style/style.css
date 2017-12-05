@@ -60,3 +60,70 @@
   top:0;
   overflow: auto;
 }
+
+.listbox{
+  position: absolute;
+  left: 0;
+  right:0;
+  bottom: 0;
+  top:0;
+  overflow: auto;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+.forderbox{
+  border:solid 1px #fff;
+
+  width:120px;
+  height:127px;
+  margin:5px;
+  position: relative;
+}
+.forderbox>i{
+  margin: 33px 10px 0 28px;
+  display:block;
+  width:84px;
+  height:58px;
+  background:url('/images/Folder_54_fe544cc.png');
+  background-repeat: no-repeat;
+}
+.forderbox>.forderavd{
+  margin: 38px 10px 0 28px;
+  display:block;
+  width:84px;
+  height:54px;
+  background:url('/images/card_54_b068d33.png');
+  background-repeat: no-repeat;
+}
+.forderbox>.doc{
+  margin: 38px 10px 0 28px;
+  display:block;
+  width:54px;
+  height:53px;
+
+  background:url('/images/timg.jpg');
+  background-repeat: no-repeat;
+  background-position: -104px -120px;
+  background-size:500%;
+}
+.forderbox>.zip{
+  margin: 38px 10px 0 28px;
+  display:block;
+  width:54px;
+  height:53px;
+
+  background:url('/images/timg.jpg');
+  background-repeat: no-repeat;
+  background-position: -104px -178px;
+  background-size:500%;
+}
+
+.forderbox>div{
+  text-align: center;
+}
+.forderbox:hover{
+  border:solid 1px #f1faf5;
+  border-radius:5px;
+  background: #f1faf5;
+}
