@@ -14,8 +14,6 @@ module.exports = (webpackConfig, env) => {
         if (String(item.test) === '/\\.less$/' || String(item.test) === '/\\.css/') {
           let css=item.use.filter(iitem => iitem.loader === 'css')[0]
               css.options.localIdentName = '[hash:base64:3]'
-              css.module=true
-              css.camelCase= true
         }
         return item
       })
@@ -35,7 +33,7 @@ module.exports = (webpackConfig, env) => {
         to: production ? '../' : webpackConfig.output.outputPath,
       },
     ]),
-    new HtmlWebpackPlugin({
+      new HtmlWebpackPlugin({
       template: `${__dirname}/src/entry.ejs`,
       filename: production ? '../index.html' : 'index.html',
       minify: production ? {
