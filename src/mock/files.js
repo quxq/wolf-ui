@@ -134,6 +134,16 @@ let database = {
 
 }
 
+let foder = (arr, id, i) => {
+  let row = list.filter(item => item.files_id === parseInt(id))
+  if (row.length > 0) {
+    row[0].sortid = i++
+    arr.push(row[0])
+    if (row[0].parentid) {
+      foder(arr, row[0].parentid,i)
+    }
+  }
+}
 
 module.exports = {
 
@@ -147,9 +157,11 @@ module.exports = {
   },
   'POST /api/v1/driver/finddir': function (req, res) {
     // console.log(req)
-    const { parentId } = req.body
-    console.log(list)
-    database.list = list.filter(item => item.parentid === parseInt(parentId)).sort((a, b) => a.files_id > b.files_id)
+    const { id } = req.body
+
+    database.list = []
+    let i=0;
+    foder(database.list, id,i)
     console.log(database.list)
     res.status(200).json(database)
   },

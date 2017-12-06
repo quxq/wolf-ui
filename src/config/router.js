@@ -38,7 +38,11 @@ const RouterConfig=[
                 component: () => import('../routes/admin/person'),
             }
         ]
-    }
+    },
+  {
+    path:'/pcenter',
+    component:()=> import('../routes/pcenter'),
+  }
 
 ]
 export default RouterConfig

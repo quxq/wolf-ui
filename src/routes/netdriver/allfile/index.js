@@ -1,6 +1,7 @@
 import { AdminFindLayout, Component } from 'wolf'
 import AllfileDataGrid from './AllfileDataGrid'
 import ToolBar from './ToolBar'
+import FileBreadcrumb from './Breadcrumb'
 
 export default class Allfile extends Component {
   /**
@@ -40,9 +41,9 @@ export default class Allfile extends Component {
           <ToolBar filesnum={this.state.filesnum} togDgStyle={this.togDgStyle}/>
           <div style={{ lineHeight: '40px' }}>
             <span>
-              返回上一级|全部文件
+              <FileBreadcrumb parentId={this.props.match.params.id}></FileBreadcrumb>
             </span>
-            <span>{this.state.selectinfo}</span>
+            <span style={{marginLeft:16}}>{this.state.selectinfo}</span>
           </div>
         </div>
         <AllfileDataGrid ref="atg" parentId={this.props.match.params.id} selectedFiles={this.selectedFiles} />
