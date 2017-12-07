@@ -193,20 +193,4 @@
 
 }
 
-.infobox{
-  width:250px;
-  height:155px;
-  border:solid 1px #e3e3e3;
-  margin:8px 0 8px 16px ;
-  padding:16px;
-  background: #fff;
-  border-radius: 5px;
-}
-.infobox h2{
-  font-size:14px;
-  color: #6c6c6c;
-}
-.infobox h1{
-  font-size:50px;
-  color: #000;
-}
+
