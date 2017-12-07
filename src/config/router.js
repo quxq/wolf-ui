@@ -42,6 +42,12 @@ const RouterConfig=[
   {
     path:'/pcenter',
     component:()=> import('../routes/pcenter'),
+    routes:[
+      {
+        path: '/pcenter/index',
+        component: () => import('../routes/pcenter/pindex'),
+      }
+    ],
   }
 
 ]

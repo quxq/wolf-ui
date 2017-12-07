@@ -9,6 +9,7 @@ import { WolfForm, AntForm } from './form/Form'
 import * as Templet from './templet/index'
 import List from './list/List'
 import ListBox from './list/ListBox'
+import Tab from './tab/Tab'
 
 export {
   AntTreeGrid,
@@ -22,5 +23,6 @@ export {
   Templet,
   List,
   ListBox,
+  Tab,
 
 }
